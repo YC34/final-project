@@ -1,0 +1,58 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jsp.dao.user.UserDao">
+    <!-- 메일 중복 체크   -->
+    <select id="existsEmail" resultType="boolean">
+        SELECT COUNT(1)
+        FROM USERS
+        WHERE 1=1
+        AND email = #{email};
+    </select>
+    <!-- 회원 가입   -->
+    <insert id="signup">
+        insert into users ( username
+                         , password
+                         , role
+                         , create_at
+                         , email
+                         , tel_number
+        )
+        values(
+                #{username}
+              , #{password}
+              , #{role}
+              , NOW()
+              , #{email}
+              , #{telNumber}
+              )
+    </insert>
+    <!-- 로그인 시 회원정보 조회 -->
+    <select id="getUserInfo" resultType="com.backend.jsp.entity.user.User">
+        select username
+             , tel_number
+             , password
+             , role
+             , create_at
+             , email
+             , delete_yn
+             , update_yn
+             , update_at
+        from USERS
+        where 1=1
+        and email = #{email}
+        and delete_yn = 'N';
+    </select>
+
+    <update id="dropUser">
+            update users
+            set
+                delete_yn = #{deleteYn}
+              , delete_at = now()
+            where 1=1
+            and email = #{email}
+    </update>
+
+
+
+</mapper>

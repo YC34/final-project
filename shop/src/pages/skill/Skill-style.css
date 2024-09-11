@@ -1,0 +1,52 @@
+/* Skill-style.css */
+.card-container {
+    padding: 2rem; /* 전체 컨테이너에 패딩 추가 */
+    background-color: rgb(244, 244, 243); /* 배경색 설정 */
+    border-radius: 0.5rem; /* 컨테이너 모서리 둥글게 (선택사항) */
+    margin: 1rem; /* 컨테이너 주위 여백 추가 (선택사항) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 컨테이너 그림자 추가 (선택사항) */
+}
+
+.card {
+    border: none; /* 카드의 기본 테두리 제거 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    border-radius: 0.5rem; /* 카드 모서리 둥글게 */
+    transition: transform 0.3s, box-shadow 0.3s; /* 호버 시 애니메이션 효과 */
+    margin: 0.5rem; /* 카드 간의 여백 조정 */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* 카드가 위로 이동하는 효과 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 호버 시 그림자 강도 증가 */
+}
+
+.card-img-top {
+    height: 160px; /* 이미지 높이 설정 */
+    object-fit: cover; /* 이미지가 카드 영역에 맞게 잘림 */
+    border-top-left-radius: 0.5rem; /* 상단 왼쪽 모서리 둥글게 */
+    border-top-right-radius: 0.5rem; /* 상단 오른쪽 모서리 둥글게 */
+}
+
+.card-header {
+    background-color: #f8f9fa; /* 카드 헤더 배경색 설정 (연한 회색) */
+    border-bottom: 1px solid #dee2e6; /* 카드 헤더와 본문 사이의 구분선 */
+    font-weight: bold; /* 헤더 텍스트를 굵게 */
+    font-size: 1.75rem;
+    padding: 0.75rem 1.25rem; /* 헤더 패딩 조정 */
+    border-top-left-radius: 0.5rem; /* 상단 왼쪽 모서리 둥글게 */
+    border-top-right-radius: 0.5rem; /* 상단 오른쪽 모서리 둥글게 */
+}
+
+.card-body {
+    padding: 1.25rem; /* 카드 본문에 패딩 추가 */
+}
+
+.card-title {
+    font-size: 1.25rem; /* 카드 제목 폰트 크기 조정 */
+    font-weight: bold; /* 카드 제목을 굵게 */
+}
+
+.card-text {
+    color: #6c757d; /* 카드 텍스트 색상 설정 */
+    font-size: 0.875rem; /* 카드 텍스트 폰트 크기 조정 */
+}

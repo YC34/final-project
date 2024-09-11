@@ -1,0 +1,15 @@
+# dev
+
+server:
+  port: 53900
+spring:
+  datasource:
+    url: jdbc:mariadb://118.220.40.170:3306/blog
+    username: chany
+    password: 1234
+    driver-class-name: org.mariadb.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

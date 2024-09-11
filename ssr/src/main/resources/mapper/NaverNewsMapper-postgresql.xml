@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jsp.dao.board.NaverNewsDao">
+    <select id="getBoardList" resultType="com.backend.jsp.entity.board.NaverNews">
+        SELECT * FROM NAVER_NEWS
+        ORDER BY news_date  DESC
+        LIMIT #{totalPage} OFFSET #{offset} ;
+    </select>
+
+    <select id="getTotalCount" resultType="Integer">
+        SELECT count(*) FROM NAVER_NEWS;
+    </select>
+
+    <select id="getNaverNews" resultType="com.backend.jsp.entity.board.NaverNews">
+        SELECT * FROM NAVER_NEWS
+        WHERE naver_news_sequence = #{nid}
+    </select>
+
+</mapper>

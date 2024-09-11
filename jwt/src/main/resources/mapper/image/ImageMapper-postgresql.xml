@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.image.ImageMapper">
+    <insert id="saveAll">
+        INSERT INTO image (board_number, image)
+        VALUES
+        <foreach collection="list" item="image" separator=",">
+            (#{image.boardNumber}, #{image.image})
+        </foreach>
+    </insert>
+
+    <select id="findByBoardNumber" resultType="com.backend.jwt.entity.image.Image">
+        SELECT board_sequence,board_number,image
+        FROM IMAGE
+        WHERE 1 = 1
+        AND board_number = #{boardNumber};
+    </select>
+
+</mapper>

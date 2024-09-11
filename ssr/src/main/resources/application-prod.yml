@@ -1,0 +1,15 @@
+server:
+  port: 8899
+spring:
+  datasource:
+    url: jdbc:postgresql://203.234.214.63:5432/postgres
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 4
+
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

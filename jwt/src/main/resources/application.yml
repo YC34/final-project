@@ -1,0 +1,19 @@
+spring:
+  application:
+            name: jwt
+  profiles:
+    active: prod
+  ## secret => 'openssl rand -hex 64'
+  ## refresh_time : 1 day
+  ## access_time : 30 min
+
+  jwt:
+    access_secret: accessabb8efffeec0fe315e1eafba3a8f33d59d355947645a3dab49c3f7d60aaf2a27bc93d2b85db7d84d2e28d31d8de8829d71b37c6b8173b9d51d2bbcc9135a89fc
+    refresh_secret: refreshabb8efffeec0fe315e1eafba3a8f33d59d355947645a3dab49c3f7d60aaf2a27bc93d2b85db7d84d2e28d31d8de8829d71b37c6b8173b9d51d2bbcc9135a89fc
+    refresh_time: 86400000
+    access_time: 1800000
+#    access_time: 10000
+
+file:
+  path: /Users/y_chan/study/temp/image/
+  url: http://localhost:8899/file/

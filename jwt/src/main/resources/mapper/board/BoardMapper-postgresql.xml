@@ -1,0 +1,49 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.board.BoardMapper">
+    <insert id="write" useGeneratedKeys="true" keyProperty="boardNumber">
+        INSERT INTO board (
+                            title
+                          , content
+                          , create_at
+                          , delete_yn
+                          , favorite_count
+                          , comment_count
+                          , view_count
+                          , write_email
+        )
+        VALUES (
+                #{title}
+              , #{content}
+              , NOW()
+              , #{deleteYn}
+              , #{favoriteCount}
+              , #{commentCount}
+              , #{viewCount}
+              , #{writeEmail}
+               )
+    </insert>
+    <select id="getBoard" resultType="com.backend.jwt.dto.object.BoardListItem">
+            SELECT
+                B.board_number AS boardNumber
+              , B.title AS title
+              , B.content AS content
+              , B.write_email AS writeEmail
+              , U.username AS writerUsername
+              , U.profile_image AS writerProfileImage
+            FROM BOARD AS B
+            INNER JOIN USERS AS U
+            ON B.write_email = u.email
+            where 1 = 1
+            AND B.board_number = #{boardNumber};
+    </select>
+
+
+    <update id="increaseViewCount">
+        UPDATE BOARD
+        SET view_count = view_count + 1
+        WHERE board_number = #{boardNumber}
+    </update>
+
+</mapper>

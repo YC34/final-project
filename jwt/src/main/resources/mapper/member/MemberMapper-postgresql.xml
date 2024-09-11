@@ -1,0 +1,88 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.auth.UserMapper">
+    <!-- 메일 중복 체크   -->
+    <select id="existsByEmail" resultType="boolean">
+        SELECT COUNT(1)
+        FROM MEMBER
+        WHERE 1=1
+        AND email = #{email};
+    </select>
+    <!-- 유저명 중복 체크   -->
+    <select id="existsByUsername" resultType="boolean">
+        SELECT COUNT(1)
+        FROM MEMBER
+        WHERE 1=1
+        AND username = #{username};
+    </select>
+    <!-- 폰 번호 중복 체크  -->
+    <select id="existsByTelNumber" resultType="boolean">
+        SELECT COUNT(1)
+        FROM MEMBER
+        WHERE 1=1
+        AND tel_number = #{telNumber};
+    </select>
+
+    <!-- 회원 가입 -->
+    <insert id="signUp">
+        insert into MEMBER (
+                               email
+                             , username
+                             , password
+                             , tel_number
+                             , role
+                             , create_at
+        )
+        values(
+                #{email}
+              , #{username}
+              , #{password}
+              , #{telNumber}
+              , #{role}
+              , NOW()
+              )
+    </insert>
+
+
+    <!-- refresh token 존재여부 확인.   -->
+    <select id="existsByRefreshToken" resultType="boolean">
+        SELECT COUNT(1)
+        FROM REFRESH_TOKEN
+        WHERE 1 = 1
+        AND member_uid = #{userId}
+    </select>
+
+    <!-- refresh token 은 회원당 1개씩만 존재.   -->
+    <!-- 존재한다면 삭제.   -->
+    <delete id="deleteRefreshToken">
+        DELETE
+        FROM REFRESH_TOKEN
+        WHERE 1 = 1
+        AND member_uid = #{userId}
+
+    </delete>
+
+    <insert id="insertRefreshToken">
+        INSERT INTO refresh_token (
+               member_uid
+             , refresh_token
+             , create_at
+                )
+        VALUES (
+                #{userId}
+               , #{refresh}
+               , NOW()
+               )
+    </insert>
+
+    <!-- 로그인 시 회원정보 조회 -->
+    <!-- TODO 추후에 가져올 데이터 명시.    -->
+    <select id="findByEmail" resultType="com.backend.jwt.entity.member.Member">
+        select * from MEMBER
+        where 1=1
+        and email = #{email}
+    </select>
+
+
+</mapper>

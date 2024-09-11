@@ -1,0 +1,42 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jsp.dao.board.EconomicDao">
+    <select id="getUSD" resultType="com.backend.jsp.entity.board.Economic">
+        SELECT
+              stock_date::date
+	        , close_vol
+        FROM economic_raw_data
+        WHERE 1 = 1
+        AND code = 'USD/KRW'
+        ORDER BY economic_uid DESC LIMIT 7 OFFSET 1;
+    </select>
+
+    <resultMap id="EconomicResultMap" type="com.backend.jsp.entity.board.Economic">
+        <result property="stockDate" column="stock_date"/>
+        <result property="closeVol" column="close_vol" jdbcType="DOUBLE"/>
+    </resultMap>
+    <select id="getJPY" resultMap="EconomicResultMap">
+        SELECT
+            stock_date::date
+	        , close_vol
+        FROM economic_raw_data
+        WHERE 1 = 1
+          AND code = 'JPY/KRW'
+        ORDER BY economic_uid DESC LIMIT 7 OFFSET 1;
+    </select>
+
+    <select id="getBTC" resultType="com.backend.jsp.entity.board.Economic">
+        SELECT
+            stock_date::date
+	        , close_vol
+        FROM economic_raw_data
+        WHERE 1 = 1
+          AND code = 'BTC/KRW'
+        ORDER BY economic_uid DESC LIMIT 7 OFFSET 1;
+    </select>
+
+
+
+
+</mapper>

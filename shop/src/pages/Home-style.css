@@ -1,0 +1,35 @@
+.main-content {
+    background-color: rgb(244, 244, 243);
+    height: 70vh;
+    width: 100%;
+    margin: auto;
+}
+
+.main-content-left-box {
+    float: left;
+    font-weight: bolder;
+    font-size: 70px;
+    padding: 120px;
+}
+
+
+
+.main-content-right-box {
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Vertically centers the content */
+    /*padding: 100px; !* Optional: Add padding to the right box *!*/
+    padding-right: 50px;
+    padding-left: 20px;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.circular-image {
+    width: 500px; /* Adjust the size as needed */
+    height: 500px; /* Adjust the size as needed */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the entire area */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for better aesthetics */
+}
