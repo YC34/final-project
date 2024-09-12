@@ -1,5 +1,7 @@
 # SPRING SECURITY + JWT + RESful API 
 ### 2024.09.11 git-branch 전략 사용
+## branch commit test
+
 # 변경 사항. 
     1. exception 처리 완료.
     2. refreshToken 추가 .
