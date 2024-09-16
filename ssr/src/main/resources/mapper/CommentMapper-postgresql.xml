@@ -1,0 +1,28 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jsp.dao.naver.CommentDao">
+   <select id="getComment">
+        SELECT *
+        FROM naver_news_comment
+        WHERE 1 = 1
+        AND naver_news_id = #{uid}
+   </select>
+   <insert id="write">
+       INSERT INTO naver_news_comment(
+         content ,
+         user_id,
+         naver_news_id,
+         parent_comment_id,
+         create_at
+       ) values(
+         #{content} ,
+         #{userId} ,
+         #{naverNewsId} ,
+         #{parentCommentId} ,
+         NOW()
+                      )
+
+   </insert>
+
+</mapper>

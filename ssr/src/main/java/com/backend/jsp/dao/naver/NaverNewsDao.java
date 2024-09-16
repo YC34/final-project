@@ -1,7 +1,7 @@
-package com.backend.jsp.dao.board;
+package com.backend.jsp.dao.naver;
 
 
-import com.backend.jsp.entity.board.NaverNews;
+import com.backend.jsp.entity.naver.NaverNews;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

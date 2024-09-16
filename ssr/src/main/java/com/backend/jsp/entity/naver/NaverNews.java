@@ -1,4 +1,4 @@
-package com.backend.jsp.entity.board;
+package com.backend.jsp.entity.naver;
 
 
 import lombok.AllArgsConstructor;
@@ -15,6 +15,7 @@ public class NaverNews {
     private Integer naverNewsSequence;
     private String title;
     private String url;
+    private String imgUrl;
     private String contents;
     private String company;
     private String newsDate;

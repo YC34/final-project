@@ -1,6 +1,5 @@
 # SPRING SECUIRTY + JSP 
 
-
 ## 프로젝트 의도
     seucirty 구조 이해를 위한 커스터마이징.
     spring boot는 jar로 build 되지만, 

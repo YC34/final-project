@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
-<%@include file="../../layouts/header.jsp"%>
+<%@include file="../layouts/header.jsp"%>
 <html>
 <head>
     <title>게시판 메인</title>
@@ -13,7 +13,7 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<link rel="stylesheet" href="/css/board-page.css" type="text/css">
+    <link rel="stylesheet" href="/css/board-page.css" type="text/css">
 <body>
     <div class="container w-75 mt-5 mx-auto p-4 bg-white shadow-sm rounded">
         <h1 class="text-center mb-4">네이버 주식 뉴스</h1>
@@ -37,7 +37,7 @@
             </thead>
             <tbody>
             <c:forEach var="news" items="${naverNewsList}" varStatus="status">
-                <tr onclick="window.location.href='/board/detail?nid=${news.naverNewsSequence}'" style="cursor:pointer;">
+                <tr onclick="window.location.href='/naver/detail?nid=${news.naverNewsSequence}'" style="cursor:pointer;">
                     <td>${(pageNum - 1) * 10 + status.index + 1}</td>
                     <td>${news.title}</td>
                     <td class="text-truncate" style="max-width: 150px;">${news.contents}</td>
