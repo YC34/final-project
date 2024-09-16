@@ -6,7 +6,6 @@
 <head>
     <title>홈 페이지</title>
     <link rel="stylesheet" href="/css/home.css" type="text/css">
-
 </head>
 <body>
     <div class="main">
@@ -17,7 +16,7 @@
                 PORTFOLIO 👋️
             </div>
             <div class="main-content-right-box">
-                <img class="circular-image"/>
+                <img src="/img/profile2.jpeg" class="circular-image" alt="profileimg"/>
             </div>
         </div>
     </div>

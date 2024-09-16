@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ public class User implements UserDetails {
     private String username;
     private String password;
     private LocalDateTime createAt;
-    private UserRole role;
+    private String role;
     private String email;
     private LocalDateTime updateAt;
     private String updateYn;
@@ -31,7 +32,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_"+role.name()));
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override

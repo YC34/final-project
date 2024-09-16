@@ -46,15 +46,16 @@ public class UserController {
         return "users/signup-page";
     }
 //
-//    // check email
-//    @GetMapping("/checkEmail")
-//    @ResponseBody
-//    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
-//        boolean isAvailable = userService.isEmailAvailable(email);  // 이메일 중복 여부 확인
-//        Map<String, Boolean> response = new HashMap<>();
-//        response.put("isAvailable", isAvailable);
-//        return ResponseEntity.ok(response);  // JSON 형식으로 응답
-//    }
+    // check email
+    @GetMapping("/checkEmail")
+    @ResponseBody
+    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
+        log.info("checkEmail : "+email);
+        boolean isAvailable = userService.isEmailAvailable(email);  // 이메일 중복 여부 확인
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isAvailable", isAvailable);
+        return ResponseEntity.ok(response);  // JSON 형식으로 응답
+    }
 
     @PostMapping("/signup")
     public String signup(User user, RedirectAttributes redirectAttributes) {
@@ -62,13 +63,13 @@ public class UserController {
         try{
             signupCount = userService.signup(user);
             if(signupCount < 0 ){
-                return "redirect:/";
+                return "redirect:users/signup";
             }
             return "redirect:users/login-page";
         }catch (EmailAlreadyExistsException e){
             // 중복되면 이렇게 메세지를 전달 할 수 있다?
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/";
+            return "redirect:users/signup";
         }
 
 
@@ -92,7 +93,6 @@ public class UserController {
                 return"redirect:/";
             }
        }
-
        redirectAttributes.addFlashAttribute("deleteMessage","탈퇴가 실패하였습니다. 다시 시도해주세요.");
         return "redirect:/";
     }

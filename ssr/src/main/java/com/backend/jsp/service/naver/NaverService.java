@@ -1,13 +1,17 @@
-package com.backend.jsp.service.board;
+package com.backend.jsp.service.naver;
 
-import com.backend.jsp.dao.board.NaverNewsDao;
-import com.backend.jsp.entity.board.Economic;
-import com.backend.jsp.entity.board.NaverNews;
+import com.backend.jsp.dao.naver.CommentDao;
+import com.backend.jsp.dao.naver.NaverNewsDao;
+import com.backend.jsp.dao.user.UserDao;
+import com.backend.jsp.dto.naver.CommentDto;
+import com.backend.jsp.entity.naver.Comment;
+import com.backend.jsp.entity.naver.Economic;
+import com.backend.jsp.entity.naver.NaverNews;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.backend.jsp.dao.board.EconomicDao;
+import com.backend.jsp.dao.naver.EconomicDao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,24 +20,44 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class BoardService {
+public class NaverService {
 
     private final EconomicDao economicDao;
     private final NaverNewsDao naverNewsDao;
+    private final CommentDao commentDao;
+    private final UserDao userDao;
 
-    public BoardService(EconomicDao economicDao, NaverNewsDao naverNewsDao) {
+    public NaverService(EconomicDao economicDao, NaverNewsDao naverNewsDao, CommentDao commentDao, UserDao userDao) {
         this.economicDao = economicDao;
         this.naverNewsDao = naverNewsDao;
+        this.commentDao = commentDao;
+        this.userDao = userDao;
     }
 
+    public Map<String, Object> getNaverNews(Integer uid){
+        Map<String, Object> result = new HashMap<>();
+            // get naver detail info
+            NaverNews naverNews = naverNewsDao.getNaverNews(uid);
+            result.put("naverNews",naverNews);
+            // get Comment detail comment
+            List<Comment> comment = commentDao.getComment(uid);
+            result.put("commentList",comment);
+
+            // get CommentReply
+//            List<Comment> commentReply commentDao.getComment(uid,)
 
 
-    public NaverNews getNaverNews(Integer nid) {
-        return naverNewsDao.getNaverNews(nid);
+        return result;
     }
+
+//    public NaverNews getNaverNews(Integer nid) {
+//        return naverNewsDao.getNaverNews(nid);
+//    }
+
+
 
     public static int pageSize = 10; // 한 페이지에 보여줄 수
-    public Map<String, List<?>> getBoardList(int pageNum) throws JsonProcessingException {
+    public Map<String, List<?>> getBoardList(int pageNum) {
 
         Map<String, List<?>> result = new HashMap<>();
 
@@ -78,8 +102,26 @@ public class BoardService {
                 log.error(e.getMessage());
            }
             // end economicList
-
         result.put("economicDataList", economicList);
         return result;
+    }
+
+    public Integer writeComment(CommentDto dto) {
+        // get userId
+        Integer userId;
+        try {
+            log.info("userEmail : {}", dto.getUserEmail());
+             userId = userDao.getUserId(dto.getUserEmail());
+             log.info("userId : {}", userId);
+        }catch (Exception e){
+            e.printStackTrace();
+            log.error(e.getMessage());
+            return -99999;
+        }
+        Comment comment =
+                new Comment(userId,dto);
+        Integer result = commentDao.write(comment);
+
+        return null;
     }
 }

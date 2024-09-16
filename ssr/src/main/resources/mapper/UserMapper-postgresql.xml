@@ -5,13 +5,13 @@
     <!-- 메일 중복 체크   -->
     <select id="existsEmail" resultType="boolean">
         SELECT COUNT(1)
-        FROM USERS
+        FROM MEMBER
         WHERE 1=1
         AND email = #{email};
     </select>
     <!-- 회원 가입   -->
     <insert id="signup">
-        insert into users ( username
+        insert into MEMBER ( username
                          , password
                          , role
                          , create_at
@@ -38,14 +38,14 @@
              , delete_yn
              , update_yn
              , update_at
-        from USERS
+        from MEMBER
         where 1=1
         and email = #{email}
         and delete_yn = 'N';
     </select>
 
     <update id="dropUser">
-            update users
+            update MEMBER
             set
                 delete_yn = #{deleteYn}
               , delete_at = now()
@@ -54,5 +54,9 @@
     </update>
 
 
-
+    <select id="getUserId">
+        SELECT uid FROM MEMBER
+        WHERE 1 = 1
+        AND email = #{userEmail}
+    </select>
 </mapper>

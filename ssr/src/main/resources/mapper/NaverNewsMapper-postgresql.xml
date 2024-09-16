@@ -1,10 +1,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.backend.jsp.dao.board.NaverNewsDao">
-    <select id="getBoardList" resultType="com.backend.jsp.entity.board.NaverNews">
+<mapper namespace="com.backend.jsp.dao.naver.NaverNewsDao">
+    <select id="getBoardList" resultType="com.backend.jsp.entity.naver.NaverNews">
         SELECT * FROM NAVER_NEWS
-        ORDER BY news_date  DESC
+        ORDER BY create_at  DESC
         LIMIT #{totalPage} OFFSET #{offset} ;
     </select>
 
@@ -12,7 +12,7 @@
         SELECT count(*) FROM NAVER_NEWS;
     </select>
 
-    <select id="getNaverNews" resultType="com.backend.jsp.entity.board.NaverNews">
+    <select id="getNaverNews" resultType="com.backend.jsp.entity.naver.NaverNews">
         SELECT * FROM NAVER_NEWS
         WHERE naver_news_sequence = #{nid}
     </select>

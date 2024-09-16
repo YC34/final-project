@@ -31,23 +31,33 @@
                         <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">skill</a>
+                        <a class="nav-link" href="/skill">skill</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/board/list">news</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-disabled="true">Disabled</a>
+                        <a class="nav-link" href="/naver/list">news</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <form method="get" action="users/login">
-            <button type="submit" class="btn btn-outline-info" style="margin-right: 5px; font-weight: bolder;">Login</button>
-        </form>
-        <form method="get" action="users/signup">
-            <button type="submit" class="btn btn-outline-primary" style="font-weight: bolder; margin-right: 20px">SignUp</button>
-        </form>
+        <c:if test="${empty sessionScope.email}">
+            <!-- 로그인 하지 않은 상태 -->
+            <form method="get" action="/users/login">
+                <button type="submit" class="btn btn-outline-info" style="margin-right: 5px; font-weight: bolder;">Login</button>
+            </form>
+            <form method="get" action="/users/signup">
+                <button type="submit" class="btn btn-outline-primary" style="font-weight: bolder; margin-right: 20px">SignUp</button>
+            </form>
+        </c:if>
+
+        <c:if test="${not empty sessionScope.email}">
+            <!-- 로그인 한 상태 -->
+            <form method="get" action="/users/mypage">
+                <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; font-weight: bolder;">Mypage</button>
+            </form>
+            <form method="post" action="/users/logout">
+                <button type="submit" class="btn btn-outline-warning" style="font-weight: bolder; margin-right: 20px">Logout</button>
+            </form>
+        </c:if>
     </nav>
 </div>
 </body>

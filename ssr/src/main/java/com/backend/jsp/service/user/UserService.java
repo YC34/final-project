@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
             log.info("signup user SERVICE");
             user.setPassword(encoder.encode(user.getPassword()));
             if(user.getRole()==null){
-//                user.setRole(UserRole.USER);
+                user.setRole("ROLE_"+ UserRole.USER);
                 log.info("user role" + user.getRole());
             }
             int count =  dao.signup(user);

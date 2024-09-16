@@ -13,11 +13,9 @@
             <div class="signup-title">SIGN UP</div>
             <div class="signup-logo"></div>
             <div class="signup-form">
-
                 <!-- Email 입력 -->
                 <label for="email">이메일</label>
                 <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." required>
-                <button type="button" id="checkEmail">중복체크</button> <!-- 이메일 중복체크 버튼 -->
 
                 <!-- 비밀번호 입력 -->
                 <label for="password">비밀번호</label>
@@ -31,46 +29,10 @@
                 <label for="telNumber">전화번호</label>
                 <input type="tel" id="telNumber" name="telNumber" placeholder="전화번호를 입력해주세요." required>
             </div>
-
             <div>
                 <button type="submit">회원가입</button>
             </div>
         </form>
     </div>
-    <script>
-            document.getElementById("checkEmail").addEventListener("click", function() {
-                const email = document.getElementById("email").value;
-                if (!email) {
-                    alert("이메일을 입력해주세요.");
-                    return;
-                }
-
-                // fetch를 통해 서버로 이메일 중복 체크 요청
-                fetch("/users/checkEmail?email=${email}", {
-                    method: "GET",
-                })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("이메일 중복 체크에 실패했습니다.");
-                        }
-                        return response.json();  // JSON 응답 처리
-                    })
-                    .then(data => {
-                        if (data.isAvailable) {
-                            alert("사용 가능한 이메일입니다.");
-                        } else {
-                            alert("이미 사용 중인 이메일입니다.");
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error.value)
-                        console.log(response.body)
-                        console.error("Error:", error);
-                        alert("이메일 중복 체크 중 오류가 발생했습니다.");
-                    });
-            });
-
-
-    </script>
 </body>
 </html>

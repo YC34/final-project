@@ -9,4 +9,6 @@ public interface UserDao {
     int signup(User user);
     User getUserInfo(String email);
     int dropUser(String email, String deleteYn);
+
+    Integer getUserId(String userEmail);
 }

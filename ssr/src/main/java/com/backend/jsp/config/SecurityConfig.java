@@ -16,8 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private String[] allowURLs = {"/","/users/login","/users/signup","/board/**","/chart/**","/css/**"};
-//    private String[] allowViews = {"/WEB-INF/views/index.jsp","/WEB-INF/views/users/login-page.jsp","/WEB-INF/views/users/signup-page.jsp","/WEB-INF/views/board/board-news-page.jsp"};
+    private String[] allowURLs = {"/","/users/login","/users/signup","/skill/**","/users/checkEmail","/naver/**","/chart/**","/css/**","/img/**"};
+//    private String[] allowViews = {"/WEB-INF/views/index.jsp","/WEB-INF/views/users/login-page.jsp","/WEB-INF/views/users/signup-page.jsp","/WEB-INF/views/board/news-page.jsp"};
 
 
     @Bean

@@ -1,5 +1,5 @@
-package com.backend.jsp.dao.board;
-import com.backend.jsp.entity.board.Economic;
+package com.backend.jsp.dao.naver;
+import com.backend.jsp.entity.naver.Economic;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
