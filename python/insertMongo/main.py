@@ -3,7 +3,6 @@ from api_call import BtcPer1min
 import pymongo
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from mongodb_insert import MongoDB
 
 
 def main():

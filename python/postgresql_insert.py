@@ -23,8 +23,7 @@ class PostgresDatabase:
                 port=self.port
             )
             self.cur = self.conn.cursor()
-            self.engine = create_engine(
-                f'postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.dbname}')
+            self.engine = create_engine(f'postgresql://{self.user}:{self.password}@{self.host}:{self.port}/{self.dbname}')
             print("Connection to PostgreSQL.")
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Error while connecting to PostgreSQL: {error}")

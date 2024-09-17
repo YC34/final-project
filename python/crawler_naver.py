@@ -12,6 +12,7 @@ class NaverNewsScraper:
         self.contents = []
         self.company_names = []
         self.dates = []
+        self.img_urls= []
     def fetch_page(self):
         page = requests.get(self.url)
         self.soup = BeautifulSoup(page.content,"html.parser")
@@ -27,6 +28,14 @@ class NaverNewsScraper:
             
             for li in lis:
                 dds = li.select('dl > dd')
+                img_tag = li.select_one('dt > a > img')
+                if img_tag:
+                    img_src = img_tag.get('src')
+                    self.img_urls.append(img_src)
+                    print(img_src)
+                else:
+                    print("No image found.")
+
                 if len(dds) >=2:
                     a_tag = dds[0].find('a')
                     if a_tag:
@@ -51,7 +60,8 @@ class NaverNewsScraper:
                 'url': self.locations,
                 'contents': self.contents,
                 'company': self.company_names,
-                'news_date': self.dates
+                'news_date': self.dates,
+                'img_url': self.img_urls
             })
         df.index +=1
         return df
@@ -60,5 +70,4 @@ class NaverNewsScraper:
         self.fetch_page()
         self.parse_data()
         return self.to_dataframe()
-
 
