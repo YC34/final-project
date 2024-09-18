@@ -1,0 +1,32 @@
+.news-container {
+    margin: 50px auto;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.news-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.news-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.news-date, .news-company {
+    color: #888;
+    margin-bottom: 10px;
+}
+.news-contents {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+.comments-section {
+    margin-top: 50px;
+}
+

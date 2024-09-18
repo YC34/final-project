@@ -55,8 +55,6 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) {
         User user = dao.getUserInfo(email);
-        // TODO 사용자 탈퇴여부 확인.
-        // TODO update 여부 확인.
         if(user == null || String.valueOf(user.getDeleteYn()).equals("Y")){
            throw new UsernameNotFoundException(email);
         }

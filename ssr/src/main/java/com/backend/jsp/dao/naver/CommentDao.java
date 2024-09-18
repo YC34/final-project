@@ -8,8 +8,7 @@ import java.util.List;
 @Mapper
 public interface CommentDao {
 //    Integer write(Comment comment);
-
     List<Comment> getComment(Integer uid);
-
     Integer write(Comment comment);
+    List<Comment> getReply(Integer commentUid, Integer naverNewsId);
 }

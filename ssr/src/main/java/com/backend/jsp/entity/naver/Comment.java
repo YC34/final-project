@@ -22,6 +22,8 @@ public class Comment {
     private Integer naverNewsId;
     private Integer userId;
     private Integer parentCommentId;
+    private String username;
+
 
     public Comment(Integer userId, CommentDto dto) {
         this.userId = userId;
