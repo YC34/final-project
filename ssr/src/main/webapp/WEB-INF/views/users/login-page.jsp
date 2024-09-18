@@ -20,7 +20,6 @@
                 <button type="submit">로그인</button>
             </div>
     </form>
-
 </div>
 <ul>
     <li><a href="/">🏠홈으로</a> &nbsp&nbsp&nbsp⎮</li>

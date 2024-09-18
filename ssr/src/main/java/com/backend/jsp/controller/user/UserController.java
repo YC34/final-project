@@ -46,16 +46,7 @@ public class UserController {
         return "users/signup-page";
     }
 //
-    // check email
-    @GetMapping("/checkEmail")
-    @ResponseBody
-    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
-        log.info("checkEmail : "+email);
-        boolean isAvailable = userService.isEmailAvailable(email);  // 이메일 중복 여부 확인
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("isAvailable", isAvailable);
-        return ResponseEntity.ok(response);  // JSON 형식으로 응답
-    }
+
 
     @PostMapping("/signup")
     public String signup(User user, RedirectAttributes redirectAttributes) {
@@ -97,7 +88,20 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/mypage")
+    public String myPage(){
+        return "users/my-page";
+    }
 
+    // check email
+    @GetMapping("/checkEmail")
+    @ResponseBody
+    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestParam String email) {
+        boolean isAvailable = userService.isEmailAvailable(email);  // 이메일 중복 여부 확인
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isAvailable", isAvailable);
+        return ResponseEntity.ok(response);
+    }
 
 
 

@@ -4,7 +4,7 @@
 <%@include file="../layouts/header.jsp"%>
 <html>
 <head>
-    <title>게시판 메인</title>
+    <title>네이버 뉴스 메인</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -12,8 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/news-page.css" type="text/css">
 </head>
-    <link rel="stylesheet" href="/css/board-page.css" type="text/css">
 <body>
     <div class="container w-75 mt-5 mx-auto p-4 bg-white shadow-sm rounded">
         <h1 class="text-center mb-4">네이버 주식 뉴스</h1>

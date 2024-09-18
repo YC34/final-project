@@ -36,16 +36,25 @@ public class NaverService {
 
     public Map<String, Object> getNaverNews(Integer uid){
         Map<String, Object> result = new HashMap<>();
+
             // get naver detail info
             NaverNews naverNews = naverNewsDao.getNaverNews(uid);
             result.put("naverNews",naverNews);
+
             // get Comment detail comment
-            List<Comment> comment = commentDao.getComment(uid);
-            result.put("commentList",comment);
+            List<Comment> comments = commentDao.getComment(uid);
+            result.put("commentList",comments);
 
             // get CommentReply
-//            List<Comment> commentReply commentDao.getComment(uid,)
-
+            Map<Integer, List<Comment>> replayMap = new HashMap<>();
+            for (Comment comment : comments){
+                if (comment.getParentCommentId() == null) {
+                    // 댓글의 ID와 뉴스 ID를 사용하여 대댓글 조회
+                    List<Comment> replies = commentDao.getReply(comment.getCommentUid(), uid);
+                    replayMap.put(comment.getCommentUid(), replies);
+                }
+            }
+            result.put("replyList",replayMap);
 
         return result;
     }
@@ -122,6 +131,6 @@ public class NaverService {
                 new Comment(userId,dto);
         Integer result = commentDao.write(comment);
 
-        return null;
+        return result;
     }
 }
