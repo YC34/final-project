@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.naver.NaverMapper">
+
+        <select id="getTotalCount">
+            SELECT COUNT(naver_news_sequence)
+            FROM NAVER_NEWS
+        </select>
+
+        <!-- TODO 검색 쿼리 만들기. if문 사용하여서-->
+        <select id="getList" resultType="com.backend.jwt.entity.naver.NaverNews">
+            SELECT *
+            FROM NAVER_NEWS
+            WHERE 1 = 1
+            ORDER BY create_at  DESC
+            LIMIT #{numOfRows} OFFSET #{offset} ;
+        </select>
+
+        <select id="getDetail" resultType="com.backend.jwt.entity.naver.NaverNews">
+            SELECT * FROM NAVER_NEWS
+            WHERE naver_news_sequence = #{naverNewsSequence}
+        </select>
+</mapper>
