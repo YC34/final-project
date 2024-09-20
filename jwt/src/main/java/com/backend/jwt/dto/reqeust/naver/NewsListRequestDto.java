@@ -32,8 +32,6 @@ public class NewsListRequestDto {
     private String companyName;
 
     public NewsListRequestDto(Map<String, String > params) {
-
-
         if (params.containsKey("pageNo") && !params.get("pageNo").isEmpty()) {
             this.pageNo = Integer.valueOf(params.get("pageNo"));
         } else {
@@ -53,4 +51,5 @@ public class NewsListRequestDto {
         this.endNewsDate = params.get("endNewsDate");
         this.companyName = params.get("companyName");
     }
+
 }

@@ -3,10 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.jwt.dao.image.ImageMapper">
     <insert id="saveAll">
-        INSERT INTO image (board_number, image)
+        INSERT INTO image (type, uid, image)
         VALUES
         <foreach collection="list" item="image" separator=",">
-            (#{image.boardNumber}, #{image.image})
+            (#{type}, #{image.boardNumber}, #{image.image})
         </foreach>
     </insert>
 
