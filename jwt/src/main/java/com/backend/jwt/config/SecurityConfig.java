@@ -36,7 +36,7 @@ import java.io.IOException;
 public class SecurityConfig {
 
     // 허용가능한 url명시
-    private final String [] allowURLs = {"/","/api/v1/auth/log-in","/api/v1/auth/sign-up","/api/v1/auth/refresh-token","/api/v1/search/**","/file/**"};
+    private final String [] allowURLs = {"/actuator/**","/","/api/v1/auth/log-in","/api/v1/auth/sign-up","/api/v1/auth/refresh-token","/api/v1/search/**","/file/**"};
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final FailedAuthenticationEntryPoint failedAuthenticationEntryPoint;

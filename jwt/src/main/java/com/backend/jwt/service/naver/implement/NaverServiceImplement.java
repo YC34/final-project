@@ -1,9 +1,13 @@
 package com.backend.jwt.service.naver.implement;
 
-import com.backend.jwt.dao.naver.NaverMapper;
+import com.backend.jwt.dao.naver.EconomicMapper;
+import com.backend.jwt.dao.naver.NewsMapper;
 import com.backend.jwt.dto.ResponseDto;
+import com.backend.jwt.dto.reqeust.naver.EconomicRawDataRequestDto;
 import com.backend.jwt.dto.reqeust.naver.NewsListRequestDto;
+import com.backend.jwt.dto.response.naver.EconomicRawDataResponseDto;
 import com.backend.jwt.dto.response.naver.NewsListResponseDto;
+import com.backend.jwt.entity.naver.EconomicRawData;
 import com.backend.jwt.entity.naver.NaverNews;
 import com.backend.jwt.service.naver.NaverService;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +24,13 @@ public class NaverServiceImplement implements NaverService {
 
     // TODO 권한 문제로 exception 보내주기 만들기.
 
-    private final NaverMapper dao;
+    private final NewsMapper newsDao;
+    private final EconomicMapper economicDao;
 
     @Autowired
-    public NaverServiceImplement(NaverMapper dao) {
-        this.dao = dao;
+    public NaverServiceImplement(NewsMapper newsDao ,EconomicMapper economicDao) {
+        this.newsDao = newsDao;
+        this.economicDao = economicDao;
     }
 
     @Override
@@ -34,23 +40,13 @@ public class NaverServiceImplement implements NaverService {
         List<NaverNews> newsList = null;
 
         try{
-
             // TODO error Response
-            Integer totalCount = dao.getTotalCount();
+            Integer totalCount = newsDao.getTotalCount();
             log.info("Total count : {}", totalCount);
-
-            // controller에서 어노테이션에서 막아 줄수 있지만, 혹시 모르니깐 set을 해준다.
-            if(dto.getPageNo() == null){
-                    dto.setPageNo(1);
-               }
-
-            if(dto.getNumOfRows() == null){
-                    dto.setNumOfRows(10);
-                }
 
             totalPages = (totalCount + dto.getNumOfRows() -1) / dto.getNumOfRows();
             offset = (dto.getPageNo() - 1) * dto.getNumOfRows();
-            newsList = dao.getList(dto.getNumOfRows() , offset);
+            newsList = newsDao.getList(dto.getNumOfRows() , offset);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -65,7 +61,7 @@ public class NaverServiceImplement implements NaverService {
     public ResponseEntity<? super NewsListResponseDto> getDetail(Integer naverNewsSequence) {
         NaverNews naverNews = null;
         try {
-             naverNews = dao.getDetail(naverNewsSequence);
+             naverNews = newsDao.getDetail(naverNewsSequence);
              if(naverNews == null){
                  return NewsListResponseDto.notFoundBoard();
              }
@@ -75,5 +71,33 @@ public class NaverServiceImplement implements NaverService {
             return ResponseDto.databaseError();
         }
         return NewsListResponseDto.success(naverNews);
+    }
+
+
+    @Override
+    public ResponseEntity<? super EconomicRawDataResponseDto> getData(EconomicRawDataRequestDto dto) {
+        List<EconomicRawData> economicRawData = null;
+        Integer offset  = null;
+        try{
+           // code check
+           boolean existsCode = economicDao.existsCode(dto.getCode());
+           if(!existsCode){
+               return EconomicRawDataResponseDto.notFoundCode();
+           }
+
+           // type check
+           boolean existsType = economicDao.existsType(dto.getEType());
+           if(!existsType){
+               return EconomicRawDataResponseDto.notFoundType();
+           }
+           log.info("beginNum: {}",dto.getBeginNum());
+           offset = (dto.getBeginNum() - 1) * dto.getNumOfRows();
+
+           economicRawData = economicDao.getData(dto.getCode(),dto.getEType(),dto.getNumOfRows(),offset);
+       }catch (Exception e){
+           e.printStackTrace();
+           return ResponseDto.databaseError();
+       }
+        return EconomicRawDataResponseDto.success(economicRawData);
     }
 }

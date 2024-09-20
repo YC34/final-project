@@ -1,7 +1,9 @@
 package com.backend.jwt.controller.naver;
 
 
+import com.backend.jwt.dto.reqeust.naver.EconomicRawDataRequestDto;
 import com.backend.jwt.dto.reqeust.naver.NewsListRequestDto;
+import com.backend.jwt.dto.response.naver.EconomicRawDataResponseDto;
 import com.backend.jwt.dto.response.naver.NewsListResponseDto;
 import com.backend.jwt.service.naver.NaverService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +40,12 @@ public class NaverController {
         return response;
     }
 
-//    @GetMapping("/")
+    @GetMapping("/economic-data")
+    public ResponseEntity<? super EconomicRawDataResponseDto> getEconomicData(@RequestParam Map<String,String> params){
+        EconomicRawDataRequestDto dto = new EconomicRawDataRequestDto(params);
+        ResponseEntity<? super EconomicRawDataResponseDto> response = service.getData(dto);
+        return response;
+    }
 
 
 }
