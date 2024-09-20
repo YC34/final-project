@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.naver.EconomicMapper">
+    <!-- code 여부   -->
+    <select id="existsCode" resultType="boolean">
+        SELECT CASE WHEN COUNT(1) > 0 THEN TRUE ELSE FALSE END
+        FROM ECONOMIC_RAW_DATA
+        WHERE 1=1
+        AND code = #{code};
+    </select>
+
+    <!-- type 여부   -->
+    <select id="existsType" resultType="boolean">
+        SELECT CASE WHEN COUNT(1) > 0 THEN TRUE ELSE FALSE END
+        FROM ECONOMIC_RAW_DATA
+        WHERE 1=1
+        AND e_type = #{eType};
+    </select>
+
+    <!-- getData   -->
+    <select id="getData" resultType="com.backend.jwt.entity.naver.EconomicRawData">
+        SELECT *
+        FROM ECONOMIC_RAW_DATA
+        WHERE 1 = 1
+        AND code = #{code}
+        AND e_type = #{eType}
+        ORDER BY stock_date  DESC
+        LIMIT #{numOfRows} OFFSET #{offset} ;
+    </select>
+
+</mapper>

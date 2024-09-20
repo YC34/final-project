@@ -20,7 +20,10 @@ public interface ResponseMessage {
     String NOT_EXISTED_USER ="This user does not exist";
     // 존재하지 않는 게시물
     String NOT_EXISTED_BOARD ="This board does not exist";
-
+    // 존재하지 않는 code
+    String NOT_EXISTED_CODE = "This code does not exist";
+    // 존재하지 않는 type
+    String NOT_EXISTED_TYPE = "This type does not exist";
 
     String TOKEN_EXPIRED ="Token Expired!!!";
     String TOKEN_NOT_EXISTED ="Token Not Existed!!!";

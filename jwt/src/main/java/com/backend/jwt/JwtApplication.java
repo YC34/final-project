@@ -2,7 +2,6 @@ package com.backend.jwt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 
 // default config 되는 문제 해결 방법 1.
 //@SpringBootApplication(exclude = {UserDetailsServiceAutoConfiguration.class})

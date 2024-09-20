@@ -17,3 +17,10 @@ spring:
 file:
   path: /Users/y_chan/study/temp/image/
   url: http://localhost:8899/file/
+
+# prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "prometheus"

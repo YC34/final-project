@@ -20,6 +20,12 @@ public interface ResponseCode {
     String NOT_EXISTED_USER ="NE";
     // 존재하지 않는 게시물
     String NOT_EXISTED_BOARD ="NB";
+
+    // 존재하지 않는 코드
+    String NOT_EXISTED_CODE = "NEC";
+    // 존재하지 않는 type
+    String NOT_EXISTED_TYPE = "NET";
+
     // token 만료.
     String TOKEN_EXPIRED ="TE";
     // 존재하지 않는 토큰

@@ -2,14 +2,10 @@ package com.backend.jwt.dto.reqeust.naver;
 
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Map;
 
 @Getter
-@Setter
-@NoArgsConstructor
 public class NewsListRequestDto {
 
     // 모두다 선택 사항.
