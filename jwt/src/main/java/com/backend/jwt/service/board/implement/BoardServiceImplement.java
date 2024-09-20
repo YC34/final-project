@@ -51,13 +51,13 @@ public class BoardServiceImplement implements BoardService {
             // image 경로를 가져와서 image table에 저장
             List<String> imageList = dto.getBoardImageList();
             List<Image> images = new ArrayList<>();
-
-            for (String img : imageList) {
-                Image image = new Image(boardNumber,img);
-                images.add(image);
-            }
-
-            imageDao.saveAll(images);
+//
+//            for (String img : imageList) {
+//                Image image = new Image(boardNumber,img);
+//                images.add(image);
+//            }
+//
+//            imageDao.saveAll(images);
 
 
         }catch (Exception e ){

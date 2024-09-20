@@ -33,10 +33,12 @@ public class NaverController {
     }
 
     @GetMapping("/detail")
-    public ResponseEntity<? super NewsListResponseDto> getDetail(@RequestParam Integer naverNewsSequence){
+    public ResponseEntity<? super NewsListResponseDto> getDetail(@RequestParam(value = "naverNewsSequence") Integer naverNewsSequence){
         ResponseEntity<? super NewsListResponseDto> response = service.getDetail(naverNewsSequence);
         return response;
     }
+
+//    @GetMapping("/")
 
 
 }

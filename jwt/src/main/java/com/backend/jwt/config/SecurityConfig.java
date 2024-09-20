@@ -19,11 +19,15 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.DispatcherServlet;
 
 import java.io.IOException;
 
@@ -52,11 +56,14 @@ public class SecurityConfig {
     // csrf는 session을 유지하지 않기 때문에 disable
 
     @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    protected SecurityFilterChain filterChain(HttpSecurity http, DispatcherServlet dispatcherServlet) throws Exception {
         http
                 .csrf( CsrfConfigurer::disable)
-                .httpBasic( HttpBasicConfigurer::disable)
+                .httpBasic(HttpBasicConfigurer::disable)
                 .formLogin( FormLoginConfigurer::disable);
+        http
+                .httpBasic(HttpBasicConfigurer::disable);
+
         http
                 .authorizeRequests(
                         (auth) ->{
@@ -82,6 +89,16 @@ public class SecurityConfig {
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
+    }
+
+
+    // UserDetailsService 를 구현하지 않으면, UserDetailsServiceConfiguration이 나온다.
+    // 이렇게 Bean으로 구현하여 등록하는 방법과 UserDetailsService에 요청을 하면 예외처리.?
+    // SpringBootApplication 쪽에 exclude를 한다.
+    // 해결 방법 2.
+    @Bean
+    UserDetailsService emptyDetailsService() {
+        return username -> {throw new UsernameNotFoundException("No local users, only JWT TOKENS allowed");};
     }
 
 
