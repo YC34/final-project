@@ -61,7 +61,7 @@ public class SecurityConfig {
                 .authorizeRequests(
                         (auth) ->{
                             auth.requestMatchers(allowURLs).permitAll()
-                                 .requestMatchers(HttpMethod.GET,"/api/vi/board/**","/api/v1/users/*").permitAll()
+                                 .requestMatchers(HttpMethod.GET,"/api/v1/naver/**","/api/v1/users/**").permitAll()
                                  .anyRequest().authenticated();
                         });
 
