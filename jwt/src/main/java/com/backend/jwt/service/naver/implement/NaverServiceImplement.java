@@ -2,13 +2,17 @@ package com.backend.jwt.service.naver.implement;
 
 import com.backend.jwt.dao.naver.EconomicMapper;
 import com.backend.jwt.dao.naver.NewsMapper;
+import com.backend.jwt.dao.naver.SummaryMapper;
 import com.backend.jwt.dto.ResponseDto;
 import com.backend.jwt.dto.reqeust.naver.EconomicRawDataRequestDto;
 import com.backend.jwt.dto.reqeust.naver.NewsListRequestDto;
+import com.backend.jwt.dto.reqeust.naver.SummaryRequestDto;
 import com.backend.jwt.dto.response.naver.EconomicRawDataResponseDto;
 import com.backend.jwt.dto.response.naver.NewsListResponseDto;
+import com.backend.jwt.dto.response.naver.SummaryResponseDto;
 import com.backend.jwt.entity.naver.EconomicRawData;
 import com.backend.jwt.entity.naver.NaverNews;
+import com.backend.jwt.entity.naver.Summary;
 import com.backend.jwt.service.naver.NaverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +30,13 @@ public class NaverServiceImplement implements NaverService {
 
     private final NewsMapper newsDao;
     private final EconomicMapper economicDao;
+    private final SummaryMapper summaryDao;
 
     @Autowired
-    public NaverServiceImplement(NewsMapper newsDao ,EconomicMapper economicDao) {
+    public NaverServiceImplement(NewsMapper newsDao ,EconomicMapper economicDao,SummaryMapper summaryDao) {
         this.newsDao = newsDao;
         this.economicDao = economicDao;
+        this.summaryDao = summaryDao;
     }
 
     @Override
@@ -100,5 +106,29 @@ public class NaverServiceImplement implements NaverService {
            return ResponseDto.databaseError();
        }
         return EconomicRawDataResponseDto.success(economicRawData);
+    }
+
+    @Override
+    public ResponseEntity<? super SummaryResponseDto> getSummaryList(SummaryRequestDto dto) {
+        List<Summary> summaryList = null;
+        try {
+            boolean existsFlag = summaryDao.existsFlag(dto.getFlag());
+            if(!existsFlag){
+                return SummaryResponseDto.notFoundFlag();
+            }
+
+            boolean existsType = summaryDao.existsType(dto.getDataType());
+            if(!existsType){
+                return SummaryResponseDto.notFoundType();
+            }
+
+            summaryList = summaryDao.getData(dto);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return SummaryResponseDto.success(summaryList);
     }
 }
