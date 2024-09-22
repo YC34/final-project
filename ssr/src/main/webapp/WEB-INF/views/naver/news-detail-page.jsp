@@ -50,8 +50,15 @@
                 <c:forEach var="comment" items="${commentList}">
                     <li class="list-group-item">
                         <strong>${comment.username}</strong>: ${comment.content}
-                        <div class="text-muted small">${comment.createAt}</div>
+                        <c:set var="isUserComment" value="${sessionScope.email eq comment.userEmail}" />
+                        <c:if test="${isUserComment}">
+                            <form action="comment/delete" method="post" style="display:inline;">
+                                <input type="hidden" name="commentUid" value="${comment.commentUid}">
+                                <button type="submit" class="btn btn-danger btn-sm ms-2">삭제</button>
+                            </form>
+                        </c:if>
 
+                        <div class="text-muted small">${comment.createAt}</div>
                         <!-- 대댓글 작성 폼 -->
                         <c:if test="${not empty sessionScope.email}">
                             <div>
@@ -73,6 +80,13 @@
                                 <c:forEach var="reply" items="${replyList[comment.commentUid]}">
                                     <li class="list-group-item">
                                         <strong>${reply.username}</strong>: ${reply.content}
+                                        <c:set var="isUserReply" value="${sessionScope.email eq reply.userEmail}" />
+                                        <c:if test="${isUserReply}">
+                                            <form action="comment/delete" method="post" style="display:inline;">
+                                                <input type="hidden" name="commentUid" value="${reply.commentUid}"> <!-- replyUid를 전달 -->
+                                                <button type="submit" class="btn btn-danger btn-sm ms-2">삭제</button>
+                                            </form>
+                                        </c:if>
                                         <div class="text-muted small">${reply.createAt}</div>
                                     </li>
                                 </c:forEach>

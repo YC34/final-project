@@ -9,6 +9,22 @@
         WHERE 1=1
         AND email = #{email};
     </select>
+
+    <!-- 유저명 중복 체크   -->
+    <select id="existsUsername" resultType="boolean">
+        SELECT COUNT(1)
+        FROM MEMBER
+        WHERE 1=1
+          AND username = #{memberName};
+    </select>
+
+    <!-- 핸드폰 번호 중복 체크   -->
+    <select id="existsTelNumber" resultType="boolean">
+        SELECT COUNT(1)
+        FROM MEMBER
+        WHERE 1=1
+          AND tel_number = #{telNumber};
+    </select>
     <!-- 회원 가입   -->
     <insert id="signup">
         insert into MEMBER ( username
@@ -19,7 +35,7 @@
                          , tel_number
         )
         values(
-                #{username}
+                #{membername}
               , #{password}
               , #{role}
               , NOW()

@@ -7,15 +7,19 @@
 <html>
 <head>
     <title>YOUNGCHAN PAGE</title>
-    <script>
-        // JavaScript to show alert if errorMessage exists
-        <c:if test="${not empty errorMessage}">
-        window.onload = function () {
-            alert("${errorMessage}");
-        };
-        <c:remove var="errorMessage" scope="session"/>
-        </c:if>
-    </script>
+<%--    <c:if test="${not empty errorMessage}">--%>
+<%--        <script>--%>
+<%--            alert("${errorMessage}");--%>
+<%--            <c:remove var="errorMessage" scope="session"/>--%>
+<%--        </script>--%>
+<%--    </c:if>--%>
+
+<%--    <c:if test="${not empty successMessage}">--%>
+<%--        <script>--%>
+<%--            alert("${successMessage}");--%>
+<%--            <c:remove var="successMessage" scope="session"/>--%>
+<%--        </script>--%>
+<%--    </c:if>--%>
 </head>
 <body>
 <div class="nav-container">
@@ -54,14 +58,27 @@
 
         <c:if test="${not empty sessionScope.email}">
             <!-- 로그인 한 상태 -->
-            <form method="get" action="/users/mypage">
-                <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; font-weight: bolder;">Mypage</button>
-            </form>
+<%--            <form method="get" action="/users/mypage">--%>
+<%--                <button type="submit" class="btn btn-outline-success" style="margin-right: 5px; font-weight: bolder;">Mypage</button>--%>
+<%--            </form>--%>
             <form method="post" action="/users/logout">
                 <button type="submit" class="btn btn-outline-warning" style="font-weight: bolder; margin-right: 20px">Logout</button>
             </form>
         </c:if>
     </nav>
 </div>
+    <c:if test="${not empty errorMessage}">
+        <script>
+            alert("${errorMessage}");
+            <c:remove var="errorMessage" scope="session"/>
+        </script>
+    </c:if>
+
+    <c:if test="${not empty successMessage}">
+        <script>
+            alert("${successMessage}");
+            <c:remove var="successMessage" scope="session"/>
+        </script>
+    </c:if>
 </body>
 </html>

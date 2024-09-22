@@ -9,14 +9,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Getter
 @Setter
 public class User implements UserDetails {
 
-    private String username;
+    private String membername;
     private String password;
     private LocalDateTime createAt;
     private String role;

@@ -4,7 +4,6 @@ package com.backend.jsp.service.user;
 import com.backend.jsp.dao.user.UserDao;
 import com.backend.jsp.entity.user.User;
 import com.backend.jsp.entity.user.UserRole;
-import com.backend.jsp.exception.EmailAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -31,14 +30,28 @@ public class UserService implements UserDetailsService {
      * @param user
      * @return int 단일 가입이므로 1이 반환 될것.
      */
-    public int signup(User user) throws EmailAlreadyExistsException {
+    public int signup(User user) throws Exception {
         log.info(user.getUsername());
         // TODO view단에서 중복체크.
-        if(dao.existsEmail(user.getEmail())){
-            throw new EmailAlreadyExistsException("이메일이 이미 존재합니다.");
+        if(dao.existsEmail(user.getUsername())){
+            log.info("Email already exists");
+            throw new Exception("이메일이 이미 존재합니다.");
+        }
+        if(dao.existsUsername(user.getMembername())){
+            log.info("Username already exists");
+            throw new Exception("사용자명이 이미 존재합니다.");
+        }
+        if(dao.existsTelNumber(user.getTelNumber())){
+            log.info("Username already exists");
+            throw new Exception("폰 번호가 존재합니다.");
         }
 
-        if( !user.getEmail().equals("") && !user.getPassword().equals("") && !user.getUsername().equals("")){
+        log.info("요청이 왜 안들어와?");
+        log.info(user.getMembername());
+        log.info(String.valueOf(!user.getMembername().isEmpty()));
+
+
+        if(!user.getMembername().isEmpty() && !user.getPassword().isEmpty() && !user.getUsername().isEmpty()){
             log.info("signup user SERVICE");
             user.setPassword(encoder.encode(user.getPassword()));
             if(user.getRole()==null){

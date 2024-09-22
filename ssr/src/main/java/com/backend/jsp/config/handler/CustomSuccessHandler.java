@@ -24,7 +24,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         session.setAttribute("email", authentication.getName());
         session.setAttribute("role", authentication.getAuthorities().iterator().next().getAuthority());
 
-        log.info("username " + authentication.getName());
+        log.info("userEmail " + authentication.getName());
         log.info("role" + authentication.getAuthorities());
         response.sendRedirect("/");
     }

@@ -23,6 +23,7 @@ public class Comment {
     private Integer userId;
     private Integer parentCommentId;
     private String username;
+    private String userEmail;
 
 
     public Comment(Integer userId, CommentDto dto) {

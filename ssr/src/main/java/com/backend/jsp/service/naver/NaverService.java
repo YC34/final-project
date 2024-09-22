@@ -34,17 +34,15 @@ public class NaverService {
         this.userDao = userDao;
     }
 
-    public Map<String, Object> getNaverNews(Integer uid){
+    public Map<String, Object>  getNaverNews(Integer uid){
         Map<String, Object> result = new HashMap<>();
 
             // get naver detail info
             NaverNews naverNews = naverNewsDao.getNaverNews(uid);
             result.put("naverNews",naverNews);
-
             // get Comment detail comment
             List<Comment> comments = commentDao.getComment(uid);
             result.put("commentList",comments);
-
             // get CommentReply
             Map<Integer, List<Comment>> replayMap = new HashMap<>();
             for (Comment comment : comments){
@@ -132,5 +130,14 @@ public class NaverService {
         Integer result = commentDao.write(comment);
 
         return result;
+    }
+
+    public Integer deleteComment(Integer commentUid) {
+        Integer result = commentDao.deleteComment(commentUid);
+        return result;
+    }
+
+    public Integer getNaverNewsId(Integer commentUid) {
+        return commentDao.getNaverNewsId(commentUid);
     }
 }

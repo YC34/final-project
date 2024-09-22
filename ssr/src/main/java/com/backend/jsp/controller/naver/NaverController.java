@@ -2,7 +2,9 @@ package com.backend.jsp.controller.naver;
 
 
 import com.backend.jsp.dto.naver.CommentDto;
+import com.backend.jsp.entity.naver.Comment;
 import com.backend.jsp.service.naver.NaverService;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,6 +43,11 @@ public class NaverController {
     @GetMapping("/detail")
     public String boardDetail(Model model, @RequestParam Integer nid){
         Map<String, Object> result = service.getNaverNews(nid);
+        List<Comment> commets  = (List<Comment>) result.get("commentList");
+        for (Comment comment : commets){
+            log.info(comment.getUsername());
+            log.info(comment.getUserEmail());
+        }
         model.addAttribute("naverNews", result.get("naverNews"));
         model.addAttribute("commentList",  result.get("commentList"));
         model.addAttribute("replyList", result.get("replyList"));
@@ -52,11 +59,27 @@ public class NaverController {
     public String writeComment(CommentDto commentDto, RedirectAttributes redirectAttributes){
         Integer count = service.writeComment(commentDto);
         if(count > 0){
+            log.info("nid {}" , commentDto.getBoardId());
             redirectAttributes.addAttribute("nid",commentDto.getBoardId());
             return "redirect:/naver/detail";
         }
 
         return  "redirect:/naver/list";
+    }
+
+//
+    @PostMapping("/comment/delete")
+    public String deleteComment(Integer commentUid, HttpSession session){
+        log.info("nid {}" , commentUid);
+        Integer naverNewsId = service.getNaverNewsId(commentUid);
+        log.info(String.valueOf(naverNewsId));
+        Integer result = service.deleteComment(commentUid);
+        if(result < 0){
+            log.info("nid {}" , naverNewsId);
+            session.setAttribute("nid", naverNewsId);
+            return "redirect:/naver/detail?nid=" + naverNewsId;
+        }
+        return "redirect:/naver/detail?nid=" + naverNewsId;
     }
 
 }

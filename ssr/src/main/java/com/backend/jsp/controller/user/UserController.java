@@ -3,6 +3,7 @@ package com.backend.jsp.controller.user;
 
 import com.backend.jsp.entity.user.User;
 import com.backend.jsp.exception.EmailAlreadyExistsException;
+import com.backend.jsp.exception.UsernameAlreadyExistsException;
 import com.backend.jsp.service.user.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,18 +50,19 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public String signup(User user, RedirectAttributes redirectAttributes) {
+    public String signup(User user, HttpSession session) {
+        log.info(user.getMembername());
         int signupCount = 0;
-        try{
+        try {
             signupCount = userService.signup(user);
-            if(signupCount < 0 ){
-                return "redirect:users/signup";
+            if (signupCount < 0) {
+                return "redirect:/users/signup"; // 슬래시 추가
             }
-            return "redirect:users/login-page";
-        }catch (EmailAlreadyExistsException e){
-            // 중복되면 이렇게 메세지를 전달 할 수 있다?
-            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:users/signup";
+            session.setAttribute("successMessage", user.getMembername() + "님 회원가입이 완료되었습니다.");
+            return "redirect:/users/login-page"; // 슬래시 추가
+        } catch (Exception e) {
+            session.setAttribute("errorMessage",e.getMessage());
+            return "redirect:/users/signup";
         }
 
 

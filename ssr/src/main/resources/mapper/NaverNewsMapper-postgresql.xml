@@ -5,7 +5,7 @@
     <select id="getBoardList" resultType="com.backend.jsp.entity.naver.NaverNews">
         SELECT * FROM NAVER_NEWS
         ORDER BY create_at  DESC
-        LIMIT #{totalPage} OFFSET #{offset} ;
+        LIMIT #{pageSize} OFFSET #{offset} ;
     </select>
 
     <select id="getTotalCount" resultType="Integer">
