@@ -26,9 +26,9 @@
     <h1 class="text-center mb-4">뉴스 수집 현황</h1>
     <!-- 버튼 추가 -->
     <div class="text-center mb-4">
-        <button class="btn btn-primary" onclick="toggleTotalCountChart()">총 수량 차트 보기</button>
-        <button class="btn btn-primary" onclick="toggleDailyTotalChart()">일일 총 수량 차트 보기</button>
-        <button class="btn btn-primary" onclick="toggleCompanyTotalChart()">회사별 총 수량 차트 보기</button>
+        <button class="btn btn-primary" onclick="toggleTotalCountChart()">TOTAL COUNT </button>
+        <button class="btn btn-primary" onclick="toggleDailyTotalChart()">DAILY COUNT </button>
+        <button class="btn btn-primary" onclick="toggleCompanyTotalChart()">COMPANY COUNT</button>
     </div>
 
 
