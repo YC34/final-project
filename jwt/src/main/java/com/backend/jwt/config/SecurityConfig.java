@@ -14,6 +14,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
@@ -102,6 +103,12 @@ public class SecurityConfig {
     }
 
 
-
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return web ->{
+//            web.ignoring()
+//                    .requestMatchers("/actuator/**");
+//        };
+//    }
 }
 

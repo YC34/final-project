@@ -24,9 +24,13 @@ import java.util.Collection;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
+//    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
+//    private final String[] excludedUrls = {"/actuator/**","/favicon.ico"};
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("Entering doFilterInternal");
 
         // reqeust token꺼내오기.
         String accessToken = parseBearerToken(request);
@@ -37,6 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info("JWT Authentication Token: {}", accessToken);
         String email = "";
         String role = "";
+
         try {
              // 메일 , 권한 뽑아오기.
              email = jwtUtil.getEmailAccess(accessToken);
@@ -80,4 +85,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return authHeader.replace("Bearer ", "");
 
     }
+
+
+    // TODO actuator config 알아보기.
+    // 요청은 되는데 , 계속해서 오류 나는 이유.?
+//    @Override
+//    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+//        String requestURI = request.getRequestURI();
+//        log.info("JWT Request URI: {}", requestURI);
+//        // AntPathMatcher를 사용하여 경로 비교
+//        boolean isExcluded = antPathMatcher.match("/actuator/**", requestURI) || "/favicon.ico".equals(requestURI);
+//        log.info("Should not filter: {}", isExcluded);
+//        return isExcluded;
+//    }
+
 }

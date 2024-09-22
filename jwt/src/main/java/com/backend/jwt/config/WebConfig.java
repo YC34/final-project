@@ -18,10 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("GET","POST","PUT","DELETE","PATCH")
                 .allowCredentials(true);
 //                .exposedHeaders("access");
+
     }
-
-
-
 
 
 }

@@ -87,6 +87,7 @@ public class NaverServiceImplement implements NaverService {
 
            // type check
            boolean existsType = economicDao.existsType(dto.getEType());
+           log.info("existsType : {}", existsType);
            if(!existsType){
                return EconomicRawDataResponseDto.notFoundType();
            }
