@@ -25,6 +25,8 @@ public interface ResponseCode {
     String NOT_EXISTED_CODE = "NEC";
     // 존재하지 않는 type
     String NOT_EXISTED_TYPE = "NET";
+    // 존재하지 않는 flag
+    String NOT_EXISTED_FLAG ="NEF";
 
     // token 만료.
     String TOKEN_EXPIRED ="TE";

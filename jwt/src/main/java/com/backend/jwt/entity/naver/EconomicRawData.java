@@ -1,10 +1,12 @@
 package com.backend.jwt.entity.naver;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class EconomicRawData {
     private Integer economicUid;
     private String code;

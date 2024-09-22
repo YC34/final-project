@@ -1,0 +1,37 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.jwt.dao.naver.SummaryMapper">
+
+    <!-- flag 여부   -->
+    <select id="existsFlag" resultType="boolean">
+        SELECT CASE WHEN COUNT(1) > 0 THEN TRUE ELSE FALSE END
+        FROM SUMMARY
+        WHERE 1=1
+        AND flag = #{flag};
+    </select>
+
+    <!-- type 여부   -->
+    <select id="existsType" resultType="boolean">
+        SELECT CASE WHEN COUNT(1) > 0 THEN TRUE ELSE FALSE END
+        FROM SUMMARY
+        WHERE 1=1
+        AND data_type = #{dataType};
+    </select>
+
+    <select id="getData" resultType="com.backend.jwt.entity.naver.Summary">
+        SELECT *
+        FROM SUMMARY
+        WHERE 1 = 1
+        AND flag = #{flag}
+        AND data_type = #{dataType}
+        <if test="date !=null">
+        AND date = #{date}
+        </if>
+        <if test="company !=null">
+        AND company = #{company}
+        </if>
+    </select>
+
+
+</mapper>

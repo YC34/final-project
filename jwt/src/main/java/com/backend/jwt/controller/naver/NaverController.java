@@ -3,8 +3,10 @@ package com.backend.jwt.controller.naver;
 
 import com.backend.jwt.dto.reqeust.naver.EconomicRawDataRequestDto;
 import com.backend.jwt.dto.reqeust.naver.NewsListRequestDto;
+import com.backend.jwt.dto.reqeust.naver.SummaryRequestDto;
 import com.backend.jwt.dto.response.naver.EconomicRawDataResponseDto;
 import com.backend.jwt.dto.response.naver.NewsListResponseDto;
+import com.backend.jwt.dto.response.naver.SummaryResponseDto;
 import com.backend.jwt.service.naver.NaverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +49,11 @@ public class NaverController {
         return response;
     }
 
+    @GetMapping("/summary")
+    public ResponseEntity<? super SummaryResponseDto> getSummary(@RequestParam Map<String,String> params){
+       SummaryRequestDto dto = new SummaryRequestDto(params);
+       ResponseEntity<? super SummaryResponseDto> response = service.getSummaryList(dto);
+       return response;
+    }
 
 }
