@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface NaverNewsDao {
 
-    List<NaverNews> getBoardList(Integer totalPage, Integer offset);
+    List<NaverNews> getBoardList(Integer pageSize, Integer offset);
     Integer getTotalCount();
     NaverNews getNaverNews(Integer nid);
 }

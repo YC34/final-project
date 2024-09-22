@@ -11,4 +11,6 @@ public interface CommentDao {
     List<Comment> getComment(Integer uid);
     Integer write(Comment comment);
     List<Comment> getReply(Integer commentUid, Integer naverNewsId);
+    Integer deleteComment(Integer commentUid);
+    Integer getNaverNewsId(Integer commentUid);
 }

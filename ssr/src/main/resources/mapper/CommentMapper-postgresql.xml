@@ -4,13 +4,13 @@
 <mapper namespace="com.backend.jsp.dao.naver.CommentDao">
     <!-- 잔체 댓글 리스트    -->
     <select id="getComment">
-        SELECT nnc.*, m.username
+        SELECT nnc.*, m.username, m.email as user_email
         FROM naver_news_comment nnc
         join member m ON nnc.user_id = m.uid
         WHERE 1=1
         AND nnc.naver_news_id = #{uid}
         AND nnc.parent_comment_id IS NULL
-        ORDER BY create_at DESC;
+        ORDER BY nnc.create_at DESC;
    </select>
 
    <insert id="write">
@@ -31,13 +31,26 @@
 
     <!-- 대댓글 가져오기 -->
     <select id="getReply">
-        SELECT nnc.*, m.username
+        SELECT nnc.*, m.email as user_email, m.username
         FROM naver_news_comment nnc
         join member m on nnc.user_id = m.uid
         WHERE 1=1
         AND nnc.parent_comment_id = #{commentUid}
         AND nnc.naver_news_id = #{naverNewsId}
-        ORDER BY create_at
+        ORDER BY nnc.create_at DESC;
     </select>
 
+    <select id="getNaverNewsId">
+        SELECT naver_news_id
+        FROM naver_news_comment
+        WHERE 1=1
+        AND comment_uid = #{commentUid}
+
+    </select>
+
+    <delete id="deleteComment">
+        DELETE FROM naver_news_comment
+        WHERE 1=1
+        AND comment_uid = #{commentUid}
+    </delete>
 </mapper>
